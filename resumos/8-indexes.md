@@ -10,13 +10,19 @@ Ao criar um índice, é importante considerar o tamanho da tabela e o tipo de co
 
 Em resumo, os índices em PostgreSQL são uma ferramenta valiosa para melhorar a performance de consultas ao banco de dados, mas é importante usá-los com sabedoria para evitar problemas de performance.
 
+## índices primários e secundários
+
+Índice Primário: É um índice especial que é criado automaticamente quando uma tabela é criada. Ele é usado para identificar de forma única cada linha da tabela. Um índice primário é criado usando a chave primária da tabela, que é uma coluna ou conjunto de colunas que não pode ter valores duplicados. O índice primário é usado para garantir que não haja duplicidade de dados na tabela.
+
+Índice Secundário: É um índice criado manualmente pelo usuário. Ele é usado para melhorar a performance das consultas que usam determinadas colunas da tabela. Um índice secundário pode ser criado em uma ou mais colunas da tabela, e pode ser criado como um índice simples ou composto (usando mais de uma coluna). O índice secundário é usado para melhorar a performance das consultas, pois permite que o banco de dados localize rapidamente os dados que precisa sem precisar percorrer todas as linhas da tabela.
+
 ## Classificação de índices
+
 A classificação "clustered" e "unclustered" se refere a como os dados são armazenados na tabela de banco de dados.
 
-- Índices Clustered: Quando um índice é "clustered", significa que os dados na tabela são reorganizados de acordo com a ordem do índice. Isso significa que as linhas da tabela ficam fisicamente organizadas na ordem do índice, tornando a consulta mais rápida. No entanto, isso também significa que as operações de inserção, atualização e exclusão podem ser mais lentas, pois a tabela precisa ser reorganizada constantemente.
+- Clustered: Quando um índice é "clustered", significa que os dados na tabela são reorganizados de acordo com a ordem do índice. Isso significa que as linhas da tabela ficam fisicamente organizadas na ordem do índice, tornando a consulta mais rápida. No entanto, isso também significa que as operações de inserção, atualização e exclusão podem ser mais lentas, pois a tabela precisa ser reorganizada constantemente.
 
-- Índices Unclustered: Quando um índice é "unclustered", significa que os dados na tabela não são reorganizados de acordo com a ordem do índice. Isso significa que as operações de inserção, atualização e exclusão são mais rápidas, pois a tabela não precisa ser reorganizada constantemente. No entanto, isso também significa que as consultas podem ser mais lentas, pois os dados não estão organizados de acordo com a ordem do índice.
-
+- Unclustered: Quando um índice é "unclustered", significa que os dados na tabela não são reorganizados de acordo com a ordem do índice. Isso significa que as operações de inserção, atualização e exclusão são mais rápidas, pois a tabela não precisa ser reorganizada constantemente. No entanto, isso também significa que as consultas podem ser mais lentas, pois os dados não estão organizados de acordo com a ordem do índice.
 
 Alguns exemplos de índices incluem:
 
@@ -65,10 +71,13 @@ O resultado será:
 Note que, neste exemplo, o índice hash torna a busca por nome muito mais eficiente do que sem um índice.
 
 ## Índice de texto:
+
 É usado para melhorar a performance de consultas que envolvem pesquisas em campos de texto. Eles usam uma estrutura de dados chamada índice invertido para indexar as palavras do texto.
 
 ## Índice Geográfico:
+
 É usado para melhorar a performance de consultas que envolvem informações geográficas, como locais, endereços, coordenadas etc.
 
 ## Índice Bitmap:
+
 É uma estrutura de dados que usa bits para representar as linhas de uma tabela. Ele é útil em consultas que envolvem múltiplos critérios de seleção.
