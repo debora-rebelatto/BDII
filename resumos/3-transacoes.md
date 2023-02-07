@@ -1,1 +1,2 @@
-# Transações
+# Transações (Transactions)
+
