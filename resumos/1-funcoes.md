@@ -16,7 +16,6 @@ $$ LANGUAGE plpgsql;
 2. Função de formatação de data: retorna a data atual formatada como "dd/mm/aaaa".
 
 ```sql
-Copy code
 CREATE FUNCTION format_date() RETURNS text AS $$
 BEGIN
     RETURN to_char(current_date, 'dd/mm/yyyy');
@@ -27,7 +26,6 @@ $$ LANGUAGE plpgsql;
 3. Função de busca por ID: retorna um registro do banco de dados com base em um ID fornecido.
 
 ```sql
-Copy code
 CREATE FUNCTION get_record(integer) RETURNS table (id integer, name text, age integer) AS $$
 BEGIN
     RETURN QUERY SELECT * FROM records WHERE id = $1;
