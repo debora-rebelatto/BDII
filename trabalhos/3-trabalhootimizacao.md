@@ -67,44 +67,23 @@ INNER JOIN people ON people.id = casts.person_id;
 
 ```sql
 EXPLAIN ANALYZE SELECT movies.name AS movie_title, people.name AS actor_name, casts.position, casts.role
-FROM movies 
+FROM movies
 INNER JOIN casts ON movies.id = casts.movie_id
 INNER JOIN people ON people.id = casts.person_id;
-```
-
-```bash
-                        QUERY PLAN
------------------------------------------------------------
- Hash Join  (cost=18110.38..79664.24 rows=1108049 width=43) (actual time=90.342..755.412 rows=1072236 loops=1)
-   Hash Cond: (casts.person_id = people.id)
-   ->  Hash Join  (cost=8714.01..48479.19 rows=1108049 width=37) (actual time=41.343..376.593 rows=1072236 loops=1)
-         Hash Cond: (casts.movie_id = movies.id)
-         ->  Seq Scan on casts  (cost=0.00..20364.49 rows=1108049 width=28) (actual time=0.047..84.346 rows=1072236 loops=1)
-         ->  Hash  (cost=4918.67..4918.67 rows=196267 width=25) (actual time=41.143..41.144 rows=191478 loops=1)
-               Buckets: 65536  Batches: 4  Memory Usage: 3386kB
-               ->  Seq Scan on movies  (cost=0.00..4918.67 rows=196267 width=25) (actual time=0.004..17.049 rows=191478 loops=1)
-   ->  Hash  (cost=4489.61..4489.61 rows=267261 width=22) (actual time=48.843..48.844 rows=267261 loops=1)
-         Buckets: 65536  Batches: 8  Memory Usage: 2414kB
-         ->  Seq Scan on people  (cost=0.00..4489.61 rows=267261 width=22) (actual time=0.005..18.206 rows=267261 loops=1)
- Planning time: 0.502 ms
- Execution time: 777.348 ms
-(13 rows)
-
-Time: 778.633 ms
 ```
 
 **Tempos de execução:**
 
 ```bash
-Execution time: 777,348 ms
-Execution time: 761,008 ms
-Execution time: 767,481 ms
-Execution time: 779,423 ms
-Execution time: 754,740 ms
+1090ms
+1463ms
+1132ms
+1117ms
+1086ms
 ```
 
 **Cálculo da Média**  
-$(777.348 + 761.008 + 767.481 + 779.423 + 754.740) / 5 = 768 ms$
+$ \frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1180,2 $
 
 **Cálculo do Desvio Padrão**  
 
@@ -115,8 +94,7 @@ $(777.348 + 761.008 + 767.481 + 779.423 + 754.740) / 5 = 768 ms$
 5. Divida a soma obtida no passo 4 pelo número total de valores.
 6. Calcule a raiz quadrada do valor obtido no passo 5.
 
-$(777,348 - 768)^2 + (761,008 - 768)^2 + (767,481 - 768)^2 + (779,423 - 768)^2 + (754,74 - 768)^2 = 442,86 $
-
+$(1090 - 1180,2)^2 + (1463 - 1180,2)^2 + (1132 - 1180,2)^2 + (1117 - 1180,2)^2 + (1086 - 1180,2)^2 = 8857 $
 $442,855 / 5 = 88,57$
 
 $\sqrt{8857} = 9,4$
@@ -140,33 +118,14 @@ CREATE INDEX idx_casts_person_id ON casts (person_id);
 ```
 Esses índices ajudarão a otimizar as junções da consulta e podem melhorar o desempenho geral. No entanto, é importante lembrar que a criação de índices também tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
 
-```sql
-                        QUERY PLAN
------------------------------------------------------------
- Hash Join  (cost=17969.63..77894.34 rows=1072236 width=43) (actual time=93.874..768.522 rows=1072236 loops=1)
-   Hash Cond: (casts.person_id = people.id)
-   ->  Hash Join  (cost=8573.25..47363.30 rows=1072236 width=37) (actual time=38.799..386.895 rows=1072236 loops=1)
-         Hash Cond: (casts.movie_id = movies.id)
-         ->  Seq Scan on casts  (cost=0.00..20006.36 rows=1072236 width=28) (actual time=0.008..98.869 rows=1072236 loops=1)
-         ->  Hash  (cost=4870.78..4870.78 rows=191478 width=25) (actual time=38.756..38.756 rows=191478 loops=1)
-               Buckets: 65536  Batches: 4  Memory Usage: 3386kB
-               ->  Seq Scan on movies  (cost=0.00..4870.78 rows=191478 width=25) (actual time=0.003..16.124 rows=191478 loops=1)
-   ->  Hash  (cost=4489.61..4489.61 rows=267261 width=22) (actual time=54.941..54.941 rows=267261 loops=1)
-         Buckets: 65536  Batches: 8  Memory Usage: 2414kB
-         ->  Seq Scan on people  (cost=0.00..4489.61 rows=267261 width=22) (actual time=0.007..20.430 rows=267261 loops=1)
- Planning time: 0.612 ms
- Execution time: 789.259 ms
-(13 rows)
-```
-
 **Tempos de execução:**
 
 ```bash
-Execution time: 789,259 ms
-Execution time: 831,134 ms
-Execution time: 812,750 ms
-Execution time: 829,235 ms
-Execution time: 785,251 ms
+1076
+1210
+1151
+1140
+1222
 ```
 
 **Cálculo da Média**
@@ -201,38 +160,14 @@ INNER JOIN movies ON movies.id = movie_categories.movie_id
 GROUP BY categories.name;
 ```
 
-```sql
-                        QUERY PLAN
------------------------------------------------------------
- GroupAggregate  (cost=36709.67..38321.73 rows=13963 width=19) (actual time=294.789..364.090 rows=513 loops=1)
-   Group Key: categories.name
-   ->  Sort  (cost=36709.67..37200.48 rows=196324 width=19) (actual time=294.749..319.670 rows=185840 loops=1)
-         Sort Key: categories.name
-         Sort Method: external merge  Disk: 5800kB
-         ->  Hash Join  (cost=8675.36..15421.47 rows=196324 width=19) (actual time=50.931..146.448 rows=185840 loops=1)
-               Hash Cond: (movie_categories.category_id = categories.id)
-               ->  Hash Join  (cost=8139.01..14369.61 rows=196324 width=16) (actual time=47.345..117.349 rows=185840 loops=1)
-                     Hash Cond: (movie_categories.movie_id = movies.id)
-                     ->  Seq Scan on movie_categories  (cost=0.00..3030.24 rows=196324 width=16) (actual time=0.005..16.054 rows=185840 loops=1)
-                     ->  Hash  (cost=4918.67..4918.67 rows=196267 width=8) (actual time=46.989..46.989 rows=191478 loops=1)
-                           Buckets: 131072  Batches: 4  Memory Usage: 2903kB
-                           ->  Seq Scan on movies  (cost=0.00..4918.67 rows=196267 width=8) (actual time=0.025..23.789 rows=191478 loops=1)
-               ->  Hash  (cost=355.60..355.60 rows=14460 width=19) (actual time=3.556..3.556 rows=14460 loops=1)
-                     Buckets: 16384  Batches: 1  Memory Usage: 903kB
-                     ->  Seq Scan on categories  (cost=0.00..355.60 rows=14460 width=19) (actual time=0.055..1.987 rows=14460 loops=1)
- Planning time: 0.536 ms
- Execution time: 365.309 ms
-(18 rows)
-```
-
 **Tempos de execução:**
 
 ```bash
-Execution time: 353,979 ms
-Execution time: 332,943 ms
-Execution time: 328,810 ms
-Execution time: 326,834 ms
-Execution time: 365,309 ms
+315
+300
+318
+301
+305
 ```
 
 **Cálculo da Média**
@@ -255,38 +190,14 @@ CREATE INDEX idx_categories_id ON categories(id);
 CREATE INDEX idx_categories_name ON categories(name);
 ```
 
-```sql
-                        QUERY PLAN
------------------------------------------------------------
- GroupAggregate  (cost=35089.76..36623.19 rows=13963 width=19) (actual time=247.674..298.886 rows=513 loops=1)
-   Group Key: categories.name
-   ->  Sort  (cost=35089.76..35554.36 rows=185840 width=19) (actual time=247.615..265.010 rows=185840 loops=1)
-         Sort Key: categories.name
-         Sort Method: external merge  Disk: 5800kB
-         ->  Hash Join  (cost=8548.60..15013.82 rows=185840 width=19) (actual time=34.621..118.357 rows=185840 loops=1)
-               Hash Cond: (movie_categories.category_id = categories.id)
-               ->  Hash Join  (cost=8012.25..13989.50 rows=185840 width=16) (actual time=31.212..91.812 rows=185840 loops=1)
-                     Hash Cond: (movie_categories.movie_id = movies.id)
-                     ->  Seq Scan on movie_categories  (cost=0.00..2925.40 rows=185840 width=16) (actual time=0.002..12.853 rows=185840 loops=1)
-                     ->  Hash  (cost=4870.78..4870.78 rows=191478 width=8) (actual time=31.167..31.167 rows=191478 loops=1)
-                           Buckets: 131072  Batches: 4  Memory Usage: 2903kB
-                           ->  Seq Scan on movies  (cost=0.00..4870.78 rows=191478 width=8) (actual time=0.004..14.723 rows=191478 loops=1)
-               ->  Hash  (cost=355.60..355.60 rows=14460 width=19) (actual time=3.401..3.401 rows=14460 loops=1)
-                     Buckets: 16384  Batches: 1  Memory Usage: 903kB
-                     ->  Seq Scan on categories  (cost=0.00..355.60 rows=14460 width=19) (actual time=0.023..1.526 rows=14460 loops=1)
-  Planning time: 0.397 ms
-  Execution time: 299.646 ms  
-  (18 rows)
-```
-
 **Tempos de execução:**
 
 ```bash
-Execution time: 299,646 ms  
-Execution time: 284,957 ms
-Execution time: 315,243 ms
-Execution time: 286,699 ms
-Execution time: 317,077 ms
+301
+303
+301
+297
+305
 ```
 
 **Cálculo da Média**
