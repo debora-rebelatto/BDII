@@ -83,7 +83,7 @@ INNER JOIN people ON people.id = casts.person_id;
 
 **Cálculo da Média**  
 
-$ \frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $
+$$\frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $$
 
 **Cálculo do Desvio Padrão**  
 
@@ -94,11 +94,11 @@ $ \frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $
 5. Divida a soma obtida no passo 4 pelo número total de valores.
 6. Calcule a raiz quadrada do valor obtido no passo 5.
 
-$(1090 - 1180,2)^2 + (1463 - 1180,2)^2 + (1132 - 1180,2)^2 + (1117 - 1180,2)^2 + (1086 - 1180,2)^2 = 121631 $
+$$(1090 - 1180,2)^2 + (1463 - 1180,2)^2 + (1132 - 1180,2)^2 + (1117 - 1180,2)^2 + (1086 - 1180,2)^2 = 121631 $$
 
-$121631 / 5 = 24326,2$
+$$121631 / 5 = 24326,2$$
 
-$\sqrt{24326,2} = 155,968$
+$$\sqrt{24326,2} = 155,968$$
 
 **Com índice:**
 
@@ -131,15 +131,15 @@ Esses índices ajudarão a otimizar as junções da consulta e podem melhorar o 
 
 **Cálculo da Média**
 
-$ \frac{1076 + 1210 + 1151 + 1140 + 1222}{5} = 1151 $
+$$\frac{1076 + 1210 + 1151 + 1140 + 1222}{5} = 1151$$
 
 **Cálculo do Desvio Padrão**
 
-$(1076 - 1151)^2 + (1210 - 1151)^2 + (1151 - 1151)^2 + (1140 - 1151)^2 + (1222 - 1151)^2 = 14268 $
+$$(1076 - 1151)^2 + (1210 - 1151)^2 + (1151 - 1151)^2 + (1140 - 1151)^2 + (1222 - 1151)^2 = 14268 $$
 
-$14268 / 5 = 2853,6$
+$$14268 / 5 = 2853,6$$
 
-$\sqrt{2853,6} = 53,41$
+$$\sqrt{2853,6} = 53,41$$
 
 A criação de índices não resultou em um grande ganho de desempenho. Apesar dos índices ajudarem a otimizar as junções, o ganho de desempenho foi relativamente pequeno, o que indica que a consulta pode ter outros gargalos que limitam o desempenho geral. É possível que a seleção de colunas ou a lógica da consulta precise ser otimizada para obter um melhor desempenho. Além disso, a criação de índices tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
 
@@ -177,15 +177,15 @@ GROUP BY categories.name;
 
 **Cálculo da Média**
 
-$ \frac{315 + 300 + 318 + 301 + 305}{5} = 305 $
+$$\frac{315 + 300 + 318 + 301 + 305}{5} = 305$$
 
 **Cálculo do Desvio Padrão**
 
-$(315 - 305)^2 + (300 - 305)^2 + (318 - 305)^2 + (301 - 305)^2 + (305 - 305)^2 = 310 $
+$$(315 - 305)^2 + (300 - 305)^2 + (318 - 305)^2 + (301 - 305)^2 + (305 - 305)^2 = 310 $$
 
-$310 / 5 = 62$
+$$310 / 5 = 62$$
 
-$\sqrt{62} = 7,874$
+$$\sqrt{62} = 7,874$$
 
 **Com índice:**
 
@@ -209,15 +209,15 @@ CREATE INDEX idx_categories_name ON categories(name);
 
 **Cálculo da Média**
 
-$\frac{301 + 303 + 301 + 297 + 305}{5} = 301$
+$$\frac{301 + 303 + 301 + 297 + 305}{5} = 301$$
 
 **Cálculo do Desvio Padrão**
 
-$(301 - 301)^2 + (303 - 301)^2 + (301 - 301)^2 + (297 - 301)^2 + (305 - 301)^2 = 36 $
+$$(301 - 301)^2 + (303 - 301)^2 + (301 - 301)^2 + (297 - 301)^2 + (305 - 301)^2 = 36 $$
 
-$36 / 5 = 7,2$
+$$36 / 5 = 7,2$$
 
-$\sqrt{7,2} = 2,6ms$
+$$\sqrt{7,2} = 2,6ms$$
 
 Nessa análise, verificamos o desempenho de uma consulta que retorna a quantidade de filmes por gênero, sem e com índices criados. Observamos que com os índices, a consulta apresentou um ganho significativo de desempenho. A média do tempo de execução da consulta sem índice foi de 305ms e com índice foi de 301ms. Além disso, o desvio padrão foi reduzido de 7,874ms para 2,6ms. Isso indica que, em média, a consulta com índice é executada mais rapidamente e com uma variação menor de tempo de execução em relação à consulta sem índice. Portanto, a criação de índices para as tabelas envolvidas na consulta pode melhorar significativamente o desempenho de consultas semelhantes.
 
