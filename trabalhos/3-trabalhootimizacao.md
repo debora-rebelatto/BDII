@@ -229,3 +229,5 @@ Fase de sondagem: o banco de dados usa a tabela hash construída na fase anterio
 
 O Hash Join é especialmente adequado para grandes tabelas, pois pode ser executado em paralelo e armazenar a tabela hash em memória. No entanto, a construção da tabela hash pode ser intensiva em recursos e levar a um alto consumo de memória, especialmente para grandes tabelas. Além disso, o Hash Join só pode ser usado quando uma tabela pode caber completamente em memória. Se a tabela não couber na memória, o Hash Join pode ser substituído pelo Merge Join ou pelo Nested Loop Join.
 
+## Conclusão
+A criação de índices não resultou em um grande ganho de desempenho. Apesar dos índices ajudarem a otimizar as junções, o ganho de desempenho foi relativamente pequeno, o que indica que a consulta pode ter outros gargalos que limitam o desempenho geral. É possível que a seleção de colunas ou a lógica da consulta precise ser otimizada para obter um melhor desempenho. Além disso, a criação de índices tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
