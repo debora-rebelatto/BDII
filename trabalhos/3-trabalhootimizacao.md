@@ -1,6 +1,5 @@
 # 🎥 Trabalho prático A3
 ## Otimização de consultas
-## Débora Rebelatto
 
 📆 **Data de entrega**: 14/02/2020
 
@@ -103,7 +102,7 @@ $\sqrt{24326,2} = 155,968$
 
 **Com índice:**
 
-ara criar índices para a consulta mencionada, é necessário analisar as colunas usadas em cada junção e na seleção:
+Para criar índices para a consulta mencionada, é necessário analisar as colunas usadas em cada junção e na seleção:
 
 `movies.id`  
 `casts.movie_id`  
