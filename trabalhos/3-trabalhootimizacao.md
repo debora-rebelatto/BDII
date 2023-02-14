@@ -83,7 +83,7 @@ INNER JOIN people ON people.id = casts.person_id;
 
 **Cálculo da Média**  
 
-$ \dfrac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $
+$ \frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $
 
 **Cálculo do Desvio Padrão**  
 
@@ -131,7 +131,7 @@ Esses índices ajudarão a otimizar as junções da consulta e podem melhorar o 
 
 **Cálculo da Média**
 
-$ \dfrac{1076 + 1210 + 1151 + 1140 + 1222}{5} = 1151 $
+$ \frac{1076 + 1210 + 1151 + 1140 + 1222}{5} = 1151 $
 
 **Cálculo do Desvio Padrão**
 
@@ -177,7 +177,7 @@ GROUP BY categories.name;
 
 **Cálculo da Média**
 
-$ \dfrac{315 + 300 + 318 + 301 + 305}{5} = 305 $
+$ \frac{315 + 300 + 318 + 301 + 305}{5} = 305 $
 
 **Cálculo do Desvio Padrão**
 
@@ -209,7 +209,7 @@ CREATE INDEX idx_categories_name ON categories(name);
 
 **Cálculo da Média**
 
-$ \dfrac{301 + 303 + 301 + 297 + 305}{5} = 301 $
+$ \frac{301 + 303 + 301 + 297 + 305}{5} = 301 $
 
 **Cálculo do Desvio Padrão**
 
