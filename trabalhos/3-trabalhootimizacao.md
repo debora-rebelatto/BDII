@@ -47,6 +47,10 @@ sudo -u postgres psql
 ## Análise de desempenho
 Para analisar o desempenho das consultas, foi utilizado o comando `EXPLAIN` do Postgres. O comando `EXPLAIN` retorna o plano de execução da consulta, que é composto por uma árvore de operações. Cada nó da árvore representa uma operação que será realizada para executar a consulta. O comando `EXPLAIN` também retorna o custo estimado de cada operação e o custo total da consulta.
 
+Todos os cálculos foram realizados utilizando o comando `EXPLAIN ANALYZE`, que além de retornar o plano de execução, também executa a consulta e retorna o tempo de execução.
+
+Os cálculos podem ser encontrados também [nesta planilha](https://docs.google.com/spreadsheets/d/1-Kdt59DL8dX9xvrQSFzTBdK3uidualAdOoZVBnuLlVA/)
+
 ### Consulta 1:
 
 Selecione o título dos filmes, o nome dos atores, a posição deles no elenco e o papel que interpretam no filme.
@@ -91,11 +95,11 @@ Time: 778.633 ms
 **Tempos de execução:**
 
 ```bash
-Execution time: 777.348 ms
-Execution time: 761.008 ms
-Execution time: 767.481 ms
-Execution time: 779.423 ms
-Execution time: 754.740 ms
+Execution time: 777,348 ms
+Execution time: 761,008 ms
+Execution time: 767,481 ms
+Execution time: 779,423 ms
+Execution time: 754,740 ms
 ```
 
 **Cálculo da Média**  
@@ -133,7 +137,6 @@ CREATE INDEX idx_casts_movie_id ON casts (movie_id);
 CREATE INDEX idx_people_id ON people (id);
 CREATE INDEX idx_casts_person_id ON casts (person_id);
 ```
-
 Esses índices ajudarão a otimizar as junções da consulta e podem melhorar o desempenho geral. No entanto, é importante lembrar que a criação de índices também tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
 
 ```sql
@@ -250,3 +253,48 @@ CREATE INDEX idx_movies_id ON movies(id);
 CREATE INDEX idx_categories_id ON categories(id);
 CREATE INDEX idx_categories_name ON categories(name);
 ```
+
+```sql
+                        QUERY PLAN
+-----------------------------------------------------------
+ GroupAggregate  (cost=35089.76..36623.19 rows=13963 width=19) (actual time=247.674..298.886 rows=513 loops=1)
+   Group Key: categories.name
+   ->  Sort  (cost=35089.76..35554.36 rows=185840 width=19) (actual time=247.615..265.010 rows=185840 loops=1)
+         Sort Key: categories.name
+         Sort Method: external merge  Disk: 5800kB
+         ->  Hash Join  (cost=8548.60..15013.82 rows=185840 width=19) (actual time=34.621..118.357 rows=185840 loops=1)
+               Hash Cond: (movie_categories.category_id = categories.id)
+               ->  Hash Join  (cost=8012.25..13989.50 rows=185840 width=16) (actual time=31.212..91.812 rows=185840 loops=1)
+                     Hash Cond: (movie_categories.movie_id = movies.id)
+                     ->  Seq Scan on movie_categories  (cost=0.00..2925.40 rows=185840 width=16) (actual time=0.002..12.853 rows=185840 loops=1)
+                     ->  Hash  (cost=4870.78..4870.78 rows=191478 width=8) (actual time=31.167..31.167 rows=191478 loops=1)
+                           Buckets: 131072  Batches: 4  Memory Usage: 2903kB
+                           ->  Seq Scan on movies  (cost=0.00..4870.78 rows=191478 width=8) (actual time=0.004..14.723 rows=191478 loops=1)
+               ->  Hash  (cost=355.60..355.60 rows=14460 width=19) (actual time=3.401..3.401 rows=14460 loops=1)
+                     Buckets: 16384  Batches: 1  Memory Usage: 903kB
+                     ->  Seq Scan on categories  (cost=0.00..355.60 rows=14460 width=19) (actual time=0.023..1.526 rows=14460 loops=1)
+  Planning time: 0.397 ms
+  Execution time: 299.646 ms  
+  (18 rows)
+```
+
+**Tempos de execução:**
+
+```bash
+Execution time: 299,646 ms  
+Execution time: 284,957 ms
+Execution time: 315,243 ms
+Execution time: 286,699 ms
+Execution time: 317,077 ms
+```
+
+**Cálculo da Média**
+(299.646 + 284.957 + 315.243 + 286.699 + 317.077) / 5 = 767,481 ms
+
+**Cálculo do Desvio Padrão**
+
+$ (299,646 - 299,646)^2 + (284,957 - 299,646)^2 + (315,243 - 299,646)^2 + (286,699 - 299,646)^2 + (317,077 - 299,646)^2 = 444,201 $
+
+$444,201 / 5 = 88,840$
+
+$\sqrt{0,519} = 9,42ms$
