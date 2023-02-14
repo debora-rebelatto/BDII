@@ -1,7 +1,7 @@
 # 🎥 Trabalho prático A3
 ## Otimização de consultas
 
-📆 **Data de entrega**: 14/02/2020
+📆 **Data de entrega**: 14/02/2023
 
 📝 **Descrição**: Um cliente deseja melhorar o desempenho do seu banco de dados. Para isto, você foi acionado para verificar o que está ocorrendo com o banco de dados. Nesse contexto, sua tarefa é criar consultas e verificar como o SGBD a está implementando. A tarefa será apresentada para o cliente (e a turma ;))
 
