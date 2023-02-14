@@ -209,7 +209,7 @@ CREATE INDEX idx_categories_name ON categories(name);
 
 **Cálculo da Média**
 
-$ \frac{301 + 303 + 301 + 297 + 305}{5} = 301 $
+$\frac{301 + 303 + 301 + 297 + 305}{5} = 301$
 
 **Cálculo do Desvio Padrão**
 
