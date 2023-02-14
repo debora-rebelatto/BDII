@@ -63,7 +63,7 @@ INNER JOIN people ON people.id = casts.person_id;
 ```
 
 ```sql
-EXPLAIN ANALYZE SELECT movies.name AS movie_title, people.name AS actor_name, casts.position, casts.role
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON) SELECT movies.name AS movie_title, people.name AS actor_name, casts.position, casts.role
 FROM movies
 INNER JOIN casts ON movies.id = casts.movie_id
 INNER JOIN people ON people.id = casts.person_id;
@@ -167,7 +167,7 @@ GROUP BY categories.name;
 ```
 
 ```sql
-EXPLAIN ANALYZE SELECT categories.name, COUNT(DISTINCT movies.id) AS num_movies
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON) SELECT categories.name, COUNT(DISTINCT movies.id) AS num_movies
 FROM categories
 INNER JOIN movie_categories ON categories.id = movie_categories.category_id
 INNER JOIN movies ON movies.id = movie_categories.movie_id
