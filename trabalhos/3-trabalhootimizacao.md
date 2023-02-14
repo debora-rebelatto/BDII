@@ -141,6 +141,8 @@ $14268 / 5 = 2853,6$
 
 $\sqrt{2853,6} = 53,41$
 
+A criação de índices não resultou em um grande ganho de desempenho. Apesar dos índices ajudarem a otimizar as junções, o ganho de desempenho foi relativamente pequeno, o que indica que a consulta pode ter outros gargalos que limitam o desempenho geral. É possível que a seleção de colunas ou a lógica da consulta precise ser otimizada para obter um melhor desempenho. Além disso, a criação de índices tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
+
 ### Consulta 2
 
 Selecione a quantidade de filmes por gênero.
@@ -217,6 +219,8 @@ $36 / 5 = 7,2$
 
 $\sqrt{7,2} = 2,6ms$
 
+Nessa análise, verificamos o desempenho de uma consulta que retorna a quantidade de filmes por gênero, sem e com índices criados. Observamos que com os índices, a consulta apresentou um ganho significativo de desempenho. A média do tempo de execução da consulta sem índice foi de 305ms e com índice foi de 301ms. Além disso, o desvio padrão foi reduzido de 7,874ms para 2,6ms. Isso indica que, em média, a consulta com índice é executada mais rapidamente e com uma variação menor de tempo de execução em relação à consulta sem índice. Portanto, a criação de índices para as tabelas envolvidas na consulta pode melhorar significativamente o desempenho de consultas semelhantes.
+
 ## Hash Join
 
 O Hash Join é um algoritmo de junção usado em bancos de dados relacionais para combinar duas tabelas grandes com base em uma coluna de junção comum. Esse algoritmo é chamado de hash join porque usa uma tabela hash interna para otimizar a junção de dados.
@@ -229,5 +233,6 @@ Fase de sondagem: o banco de dados usa a tabela hash construída na fase anterio
 
 O Hash Join é especialmente adequado para grandes tabelas, pois pode ser executado em paralelo e armazenar a tabela hash em memória. No entanto, a construção da tabela hash pode ser intensiva em recursos e levar a um alto consumo de memória, especialmente para grandes tabelas. Além disso, o Hash Join só pode ser usado quando uma tabela pode caber completamente em memória. Se a tabela não couber na memória, o Hash Join pode ser substituído pelo Merge Join ou pelo Nested Loop Join.
 
-## Conclusão
-A criação de índices não resultou em um grande ganho de desempenho. Apesar dos índices ajudarem a otimizar as junções, o ganho de desempenho foi relativamente pequeno, o que indica que a consulta pode ter outros gargalos que limitam o desempenho geral. É possível que a seleção de colunas ou a lógica da consulta precise ser otimizada para obter um melhor desempenho. Além disso, a criação de índices tem um custo em termos de espaço de armazenamento e desempenho de gravação, então é importante encontrar um equilíbrio entre o desempenho da consulta e o desempenho geral do sistema.
+# Conclusão
+
+Utilizando os conceitos de otimização de consultas, foi possível identificar os principais gargalos de desempenho de uma consulta e otimizá-la. Além disso, foi possível identificar os tipos de junções mais adequados para cada situação e criar índices para melhorar o desempenho de consultas semelhantes.
