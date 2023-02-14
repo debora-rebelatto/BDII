@@ -105,13 +105,6 @@ $$\frac{1090 + 1463 + 1132 + 1117 + 1086}{5} = 1117 $$
 
 **Cálculo do Desvio Padrão**  
 
-1. Calcule a média dos valores: some todos os valores e divida pelo número total de valores.
-2. Para cada valor, calcule a diferença entre o valor e a média.
-3. Eleve ao quadrado cada diferença calculada no passo anterior.
-4. Some todos os valores obtidos no passo 3.
-5. Divida a soma obtida no passo 4 pelo número total de valores.
-6. Calcule a raiz quadrada do valor obtido no passo 5.
-
 $$(1090 - 1180,2)^2 + (1463 - 1180,2)^2 + (1132 - 1180,2)^2 + (1117 - 1180,2)^2 + (1086 - 1180,2)^2 = 121631 $$
 
 $$121631 / 5 = 24326,2$$
