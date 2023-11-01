@@ -31,16 +31,17 @@ B- Mostre como o Postgres irá lidar com as transações conforme a situação d
 
 
 3- (2,5 Pontos) Demonstre se o escalonador abaixo respeita o protocolo 2PL usando somente bloqueios exclusivos.
-||T1|T2|
-|--|---|---|
-|1|Read(A)|
-|2|Read(B)|
-|3||Read(A)|
-|4|Write(B)||
-|5|Commit||
-|6||Read(B)|
-|7||Write(B)|
-|8||Commit|
+|     | T1       | T2       |
+| --- | -------- | -------- |
+| 1   | Read(A)  |
+| 2   | Read(B)  |
+| 3   |          | Read(A)  |
+| 4   | Write(B) |          |
+| 5   | Commit   |          |
+| 6   |          | Read(B)  |
+| 7   |          | Write(B) |
+| 8   |          | Commit   |
+
 
 4- (2 Ponto): No PostgreSQL, o MVCC é uma técnica fundamental para manter a consistência dos dados em ambientes de múltiplos usuários. Assinale a alternativa correta referente ao MVCC:  
 A) Garante a integridade referencial dos dados.  
