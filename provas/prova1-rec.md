@@ -1,6 +1,5 @@
 # Prova 1 - Rec 2023/1  
 
-
 1. A prova deve ser feita a caneta, em provas com a escrita a lápis, não serão aceitas reclamações relativas à correção. 2. Manter celulares desligados!
 2. A compreensão das questões faz parte da prova.
 

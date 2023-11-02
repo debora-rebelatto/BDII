@@ -1,38 +1,25 @@
 # Resumos Banco de Dados II
 
-```bash
-BDII
-├── README.md
-├── provas
-│   ├── prova1.md
-│   └── prova2.md
-├── resumos
-│   ├── 1-funcoes.md
-│   ├── 2-triggers.md
-│   ├── 3-transacoes.md
-│   ├── 4-concorrencia.md
-│   ├── 5-recovery.md
-│   ├── 6-discos.md
-│   ├── 7-indexes.md
-│   ├── 8-hash.md
-│   ├── 9-operadores.md
-│   └── 10-queryoptimization.md
-└── slides
-│   ├── 1-introducao.pdf
-│   ├── 2-funcoes.pdf
-│   ├── 3-triggers.pdf
-│   ├── 4-transacoes.pdf
-│   ├── 5-concorrencia.pdf
-│   ├── 6-log_short.pdf
-│   ├── 7-discos.pdf
-│   ├── 8-indexes.pdf
-│   ├── 9-hash.pdf
-│   ├── 10-operadores.pdf
-│   └── 11-ShortQueryOptimization.pdf
-└── trabalhos
-    ├── 1-revisaosql.md
-    ├── 1-trabalhotriggers.md
-    ├── 2-trabalholog.md
-    └── 3-trabalhootimizacao.md
+Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 
-```
+## :book: Conteúdo:
+
+- Revisão SQL de BDI
+- [Funções](https://www.postgresql.org/docs/current/functions.html)
+- [Triggers](https://www.postgresql.org/docs/current/triggers.html)
+- [Transações](https://www.postgresql.org/docs/current/transactions.html)
+- Concorrência
+- Discos
+- [Indexes/Hash](https://www.postgresql.org/docs/current/hash-index.html)
+- Operadores
+- Otimização
+
+## Referências:
+
+- [SQL Tutorial](https://www.w3schools.com/sql/default.asp)
+
+No geral, as docs do Postgres tem uma explicação boa sobre como boa parte do que é explicado na matéria funciona.
+
+- [Postgres Docs](https://www.postgresql.org/docs/current/)
+- [Storage](https://www.postgresql.org/docs/current/storage.html)
+- [Postgres System Columns Explained (ctid, xmin,xmax)](https://www.youtube.com/watch?v=AveRgUrC7FM&ab_channel=HusseinNasser)
