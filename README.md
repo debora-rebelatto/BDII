@@ -17,9 +17,12 @@ Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 ## Referências:
 
 - [SQL Tutorial](https://www.w3schools.com/sql/default.asp)
-
-No geral, as docs do Postgres tem uma explicação boa sobre como boa parte do que é explicado na matéria funciona.
-
 - [Postgres Docs](https://www.postgresql.org/docs/current/)
 - [Storage](https://www.postgresql.org/docs/current/storage.html)
 - [Postgres System Columns Explained (ctid, xmin,xmax)](https://www.youtube.com/watch?v=AveRgUrC7FM&ab_channel=HusseinNasser)
+- [Re-Introducing Hash Indexes in PostgreSQL](https://hakibenita.com/postgresql-hash-index)
+- [Explaining the Postgres Query Optimizer](https://momjian.us/main/writings/pgsql/optimizer.pdf)
+  [:movie_camera: video](https://www.youtube.com/watch?v=wLpcVM9qxV0&ab_channel=MicrosoftDeveloper)
+
+-[Storage](https://www.postgresql.org/docs/current/storage.html)
+  - [Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html)
