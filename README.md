@@ -24,5 +24,5 @@ Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 - [Explaining the Postgres Query Optimizer](https://momjian.us/main/writings/pgsql/optimizer.pdf)
   [:movie_camera: video](https://www.youtube.com/watch?v=wLpcVM9qxV0&ab_channel=MicrosoftDeveloper)
 
--[Storage](https://www.postgresql.org/docs/current/storage.html)
+- [Storage](https://www.postgresql.org/docs/current/storage.html)
   - [Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html)
