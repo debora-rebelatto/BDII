@@ -12,7 +12,7 @@ Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 - Discos
 - [Indexes/Hash](https://www.postgresql.org/docs/current/hash-index.html)
 - Operadores
-- Otimização
+- [Otimização](https://www.postgresql.org/docs/current/planner-optimizer.html)
 
 ## Referências:
 
@@ -26,3 +26,4 @@ Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 
 - [Storage](https://www.postgresql.org/docs/current/storage.html)
   - [Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html)
+
