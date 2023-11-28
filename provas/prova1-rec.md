@@ -49,3 +49,35 @@ C- Uma transação começa com uma atualização em uma tabela, finaliza a trans
 D- Uma transação começa com uma atualização em uma tabela, mas outra transação realiza uma leitura na tabela antes da atualização ser Implementada (commit da primeira transação), resultando na primeira transação sendo revertida (rollback).
 
 E - Uma transação começa com uma atualização em uma tabela, mas a atualização é interrompida pelo desligamento do servidor, resultando na reversão da transação (rollback).
+
+## Respostas:
+
+2 - 
+Para simular uma situação de leitura suja (dirty read), você pode criar uma tabela e realizar uma transação onde um terminal insere dados na tabela e outro terminal tenta ler esses dados antes que a primeira transação seja confirmada (comitada). Aqui está um exemplo:
+
+**Terminal 1**:
+```sql
+-- Criação da tabela
+CREATE TABLE t1 (i int, nome varchar(50));
+
+-- Inicia uma transação
+BEGIN;
+
+-- Insere dados na tabela (não confirmados)
+INSERT INTO t1 (i, nome) VALUES (1, 'Dado Não Comitado');
+
+-- Agora, não confirmamos a transação ainda (não realizamos o COMMIT)
+```
+
+**Terminal 2**:
+```sql
+-- Tenta ler os dados da tabela antes da confirmação da transação do Terminal 1
+SELECT * FROM t1;
+```
+
+Neste exemplo, o Terminal 1 iniciou uma transação, inseriu dados na tabela `t1`, mas não confirmou a transação com um COMMIT. Em seguida, o Terminal 2 tenta ler os dados da tabela. Como o Terminal 1 ainda não confirmou a transação, o Terminal 2 pode ler os dados não confirmados, o que caracteriza uma situação de leitura suja (dirty read).
+
+Lembrando que essa situação de leitura suja é possível porque o SGBD está lendo dados que ainda não foram confirmados (comitados) devido à natureza do nível de isolamento (ou falta dele) entre as transações. A leitura suja pode levar a resultados imprecisos e não deve ser utilizada em situações críticas.
+
+
+4 - Letra D
