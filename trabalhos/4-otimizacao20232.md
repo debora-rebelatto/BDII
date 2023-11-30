@@ -1,7 +1,7 @@
 ﻿# Trabalho prático A3 - Otimização de consultas (05/12 - duplas)
- 
- [Link Docs](https://docs.google.com/document/d/18HfXRSnD8DmN3SrCVPxFZPG-TSMB1Aw97SYm6ffIHcs/edit)  
- 
+
+[Link Docs](https://docs.google.com/document/d/18HfXRSnD8DmN3SrCVPxFZPG-TSMB1Aw97SYm6ffIHcs/edit)  
+
 Um cliente deseja melhorar o desempenho do seu banco de dados. Para isto, você foi acionado para verificar o que está ocorrendo com o banco de dados. Sua tarefa é verificar as consultas que estão rodando no sistema e verificar como o SGBD a está implementando.
 
 As consultas serão as mesmas submetidas na atividade "Dojo SQL" entregue no SIGAA.  
