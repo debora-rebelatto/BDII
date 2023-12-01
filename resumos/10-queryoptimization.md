@@ -1,11 +1,36 @@
 # Planos de Consulta
 
+[Slide](../slides/11-QueryOptimization_final.pdf)
+
 ## Otimizador de consulta
 
 Problema: Uma query SQL é declarativa - não especifica o plano de execução.  
-Solução: Converter a query para um plano equivalente da álgebra relacional.
+Solução: Converter a query para um pl ano equivalente da álgebra relacional.
 
 ## Esquema Geral do Otimizador
+
+```mermaid
+graph TD
+    A[Usuário] -->|Consulta SQL| B[SQL Parser]
+    B --> C[Otimizador]
+    C -->|Melhor Plano de Execução| D((Resultado))
+
+    subgraph Bloco_SQL_Simples["Bloco SQL Simples"]
+        style Bloco_SQL_Simples stroke:#333,stroke-width:2px;
+        E[Transforma em Álgebra]
+        F[Plano Canônico]
+        G[Criação de Planos Alternativos]
+        H[Planos Alternativos]
+        I[Estima de Custos]
+
+        E -->|Passo 1| F
+        F -->|Passo 2| G
+        G -->|Passo 3| H
+        H -->|Passo 4| I
+    end
+
+    C --> Bloco_SQL_Simples
+```
 
 - Estratégia que o banco utiliza para executar uma consulta
 - Normalmente, vários planos são proposto e um deles é escolhido
@@ -152,12 +177,6 @@ graph TD
 
 => 500.500 IOs
 
-pi("π<sub>sname</sub>") --> rating("rating = 5")
-
-    delta("δ<sub>bid=100</sub>") --> join("⨝<sub>sid = sid</sub>")
-    join("⨝<sub>sid = sid</sub>") --> s(Sailors)
-    join("⨝<sub>sid = sid</sub>") --> reserves(Reserves)
-
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": true}} }%%
 graph TD
@@ -193,7 +212,85 @@ graph TD
     style PageOriented1 fill: none;
     style PageOriented1 stroke:none;
 ```
+
 250.500 IOs
+
+## Plano de Consulta
+
+Na álgebra relacional, várias operações têm equivalências entre si, o que significa que expressões diferentes podem representar a mesma operação ou a mesma saída, embora possam ser expressas de maneira distinta. Essas equivalências também têm impacto nos planos de custo ao executar consultas no banco de dados.
+
+### Equivalências na Álgebra Relacional
+
+π δ ⨝
+
+**Seleções**
+δ<sub>c<sub>1</sub>^c<sub>2</sub>...c<sub>n</sub></sub> (R) = δ <sub>c<sub>1</sub></sub>(δ<sub>c<sub>2</sub></sub>(... (δ<sub>c<sub>n</sub></sub>(R))))
+
+δ<sub>c<sub>1</sub></sub>(δ<sub>c<sub>2</sub></sub>(R)) = δ<sub>c<sub>2</sub></sub>(δ<sub>c<sub>1</sub></sub>(R))
+
+**Projeção**
+π <sub>a<sub>1</sub></sub>(R) = π <sub>a<sub>1</sub></sub>
+
+**Produtos Cartesianos e Junções**
+
+**Seleções Projeções e Junções**
+
+## Heurística
+
+Aqui estão as ideias contidas nos bullet points organizadas:
+
+### Heurística para Otimização de Consultas:
+
+1. **Empurrar Projeções para a Parte Inferior da Árvore:**
+
+   - Reduz o tamanho da resposta.
+   - Exemplo: Em uma relação R(a, b, c) com 20.000 tuplas:
+     - Cada tupla é de 190 bytes (header = 24 bytes, a = 8 bytes, b = 8 bytes, c = 150 bytes).
+     - Se um bloco é de 1024 bytes, então 1 bloco pode conter 5 tuplas (5 \* 190 = 950).
+     - Para 20.000 tuplas, seriam necessários 4.000 blocos.
+     - Ao fazer uma projeção eliminando o atributo c, reduz-se para 40 bytes por tupla, cabendo 25 em um bloco.
+     - Isso resulta em apenas 800 blocos necessários (fator de redução de 5).
+
+2. **Deixar as Seleções Próximas às Tabelas Aplicadas:**
+   - Diminui o número de tuplas a serem processadas mais adiante.
+3. **Aplicar Joins por Último (Quando Possível):**
+   - Realizar os joins depois das projeções e seleções.
+   - Ajuda a reduzir o número de tuplas que passarão pelo processo de junção, otimizando o desempenho da consulta.
+
+Essas heurísticas são diretrizes úteis para a otimização de consultas SQL, ajudando a reduzir o custo das consultas através da manipulação estratégica das operações, projeções, seleções e joins, quando possível.
+
+## Plano de Consulta - Baseado em Heurística
+
+**Algoritmo básico**
+
+Passo 1: Quebre as seleção com condições conjuntivas (and) em uma cascata de operações de seleção
+Passo 2: Mova cada operação de seleção o mais baixo possível na árvore de consulta
+Passo 3: Reordene os nós folhas de forma que as seleções mais restritivas sejam executadas primeiro
+Passo 4: Combine as operações de produto cartesiano com seleções subseqüentes (formando junções)
+Passo 5: Quebre e mova as projeção o mais baixo possível na árvore e crie novas projeção quando necessário
+Passo 6: Identifique subárvore que representam grupos de operações que podem ser executadas em um único algoritmo
+
+**Exemplo**
+Dada a consulta:
+
+```sql
+select * from R natural join S natural join T natural join V;
+```
+
+```mermaid
+
+```
+
+## Passos Otimizador de Consultas
+
+## Conclusões
+
+- Consultas são as operações mais caras do SGBD
+- Encontrar a melhor forma de executar uma consulta é um problema intratável em computação
+- O dicionário de dados tem um papel importante no processamento de consultas
+- Índices são essenciais
+- O SGBD tenta resolver os problemas de otimização de forma automática
+
 # Explain Analyze
 
 The `EXPLAIN ANALYZE` command in PostgreSQL is a powerful tool used to understand and optimize the execution plan of a query. It provides detailed information about how PostgreSQL intends to execute a query and how it actually performs during execution.
