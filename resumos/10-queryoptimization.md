@@ -1,10 +1,5 @@
 # Planos de Consulta
 
-    // Carregar shipment do banco
-    // ao invés de criar um novo, fazer um findquery
-    // fazer o novo q o padrão é correct
-    // atualizar os testes
-
 ## Otimizador de consulta
 
 Problema: Uma query SQL é declarativa - não especifica o plano de execução.  
