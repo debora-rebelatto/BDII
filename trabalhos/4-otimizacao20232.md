@@ -19,7 +19,7 @@ Atentar: Qual algoritmo foi usado para realizar o Join? Explique o seu funcionam
 
 ## Tarefa 2
 Analisar a consulta visando possíveis melhorias na consulta.   
-Qual etapa está gastando mais recursos? Será que a inserção de index pode ajudar a reduzir o tempo da consulta?   
+Qual etapa está gastando mais recursos? Será que a inserção de index pode ajudar a reduzir o tempo da consulta?
 Além disso, reescrever a consulta pode auxiliar o SBGB?  
 
 ## Entrega

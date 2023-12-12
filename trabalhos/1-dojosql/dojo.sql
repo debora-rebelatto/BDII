@@ -18,8 +18,8 @@ GROUP BY d.dep_id;
 
 -- 3- Listar o dep_id, nome e o salario do funcionario com maior salario dentro de cada departamento (usar o with)
 SELECT dep_id, nome, salario 
-FROM empregados 
-WHERE (dep_id,salario) 
+FROM empregados
+WHERE (dep_id,salario)
 IN (SELECT dep_id, MAX(salario) 
 FROM empregados 
 GROUP BY dep_id)
