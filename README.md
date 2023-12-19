@@ -27,3 +27,12 @@ Resumos, slides, provas e trabalhos de BD II para auxílio da matéria
 - [Storage](https://www.postgresql.org/docs/current/storage.html)
   - [Database Page Layout](https://www.postgresql.org/docs/current/storage-page-layout.html)
 
+- [EXPLAIN](https://www.postgresql.org/docs/current/sql-explain.html)
+- [ANALYZE](https://www.postgresql.org/docs/16/sql-analyze.html)
+- [Explaining Your Postgres Query Performance](https://www.crunchydata.com/blog/get-started-with-explain-analyze)
+
+## Ferramentas Trabalho Final:
+
+- [Readable EXPLAIN ANALYZE](https://explain.depesz.com/)
+- [EXPLAIN ANALYZE graph](https://explain.dalibo.com/)
+
